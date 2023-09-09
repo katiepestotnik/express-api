@@ -9,8 +9,16 @@ const {PORT} = process.env
 const express = require('express')
 // create app object
 const app = express()
+const cors = require("cors")
 //import all available routes in our /routes/indes.js the user can use
 const routes = require('./routes/index')
+
+///////////////////////////////
+// MiddleWare
+////////////////////////////////
+app.use(cors()); // to prevent cors errors, open access to all origins
+app.use(express.urlencoded({extended: true}))
+app.use(express.json()); // parse json bodies
 
 ///////////////////////////////
 // ROUTES
