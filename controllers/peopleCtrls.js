@@ -20,15 +20,20 @@ const getPeople = async (req, res) => {
 // PEOPLE CREATE ROUTE /PEOPLE
 const createPeople = async (req, res) => {
     try{
-        const createdPerson = await db.Person.create(req.body)
+        console.log(req.body, "REQ BODY IN CREATE PEOPLE")
+        const createdPerson = await db.Person.create(req)
         createdPerson.save()
+        console.log(createdPerson, "RESPONSE CREATEDPERSON")
+
         if(!createdPerson){
-            res.status(404).json({message: "Cannot create person"})
+            console.log("NO CREATED PERSON 404")
+            res.status(400).json({message: "Cannot create person"})
         }
         else {
+            console.log("CREATED STATUS 201")
             res.status(201).json({message: "person created", data: createdPerson})
         }
-    } catch(err) {res.status(400).json({error: err.message})}
+    } catch(err) {res.status(500).json({error: err.message})}
 }
 
 // PEOPLE UPDATE ROUTE

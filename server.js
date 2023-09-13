@@ -16,7 +16,7 @@ const routes = require('./routes/index')
 ///////////////////////////////
 // MiddleWare
 ////////////////////////////////
-app.use(cors()); // to prevent cors errors, open access to all origins
+app.use(cors('*')); // to prevent cors errors, open access to all origins
 app.use(express.urlencoded({extended: true}))
 app.use(express.json()); // parse json bodies
 

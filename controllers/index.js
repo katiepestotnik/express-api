@@ -1,3 +1,3 @@
 module.exports = {
-    peopleCtrl: require("./PeopleCtrls")
+    peopleCtrl: require("./peopleCtrls")
 }
