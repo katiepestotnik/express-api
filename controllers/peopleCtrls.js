@@ -6,7 +6,7 @@ const getPeople = async (req, res) => {
     // db.Model.query() <-- syntax
     try{
         const foundPeople = await db.Person.find({})
-        if(!foundPeople){
+        if (foundPeople.length === 0){
             res.status(404).json({message: "Cannot find People"})
         } else {
             res.status(200).json({data: foundPeople})
@@ -21,7 +21,7 @@ const getPeople = async (req, res) => {
 const createPeople = async (req, res) => {
     try{
         console.log(req.body, "REQ BODY IN CREATE PEOPLE")
-        const createdPerson = await db.Person.create(req)
+        const createdPerson = await db.Person.create(req.body)
         createdPerson.save()
         console.log(createdPerson, "RESPONSE CREATEDPERSON")
 
