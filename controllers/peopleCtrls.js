@@ -1,5 +1,34 @@
 const db = require('../models') //this is where our db mongoose connection live
 
+//seed route
+const seedPerson = async (req, res) => {
+    try{
+        const seededPerson = await db.Person.create([
+            {
+              firstName: 'Katie',
+              lastName: 'Pestotnik', streetAddressL1: '123 Fake Way',
+              streetAddressL2: '',
+              city: 'City of Love',
+              state: 'Colorado',
+              zip: 80603,
+              country: 'USA',
+              pastAddresses: [],
+              phoneNumber: '(777)-777-7777',
+              email: 'fake@gmail.com'
+            }
+      
+        ])
+        console.log(seededPerson, "RESPONSE SEEDEDPERSON")
+        if(!seededPerson){
+            console.log("NO SEED PERSON 404")
+            res.status(400).json({message: "Cannot seed person"})
+        }
+        else {
+            console.log("SEEDED STATUS 201")
+            res.status(201).json({message: "person seeded", data: seededPerson})
+        }
+    } catch(err) {res.status(500).json({error: err.message})}
+}
 //INDEX PEOPLE ROUTE /PEOPLE
 const getPeople = async (req, res) => {
     //db.People.find({}) <--- db has all of our models in it so we can use any of them this way!
@@ -66,6 +95,7 @@ const deletePerson = async (req, res) => {
 
 
 module.exports = {
+    seedPerson,
     getPeople, 
     createPeople,
     updatePerson, 
